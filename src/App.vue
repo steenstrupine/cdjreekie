@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
+    <img alt="Callum Reekie" src="./assets/callum.png">
     <HelloWorld msg="Welcome to the website of Callum D.J. Reekie"/>
   </div>
 </template>
