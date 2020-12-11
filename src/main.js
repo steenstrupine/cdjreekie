@@ -10,15 +10,15 @@ import About from './components/About.vue'
 import Work from './components/Work.vue'
 
 const routes = [{
-    path: '/',
+    path: '/cdjreekie',
     component: Home
   },
   {
-    path: '/About',
+    path: '/cdjreekie/About',
     component: About
   },
    {
-    path: '/Work',
+    path: '/cdjreekie/Work',
     component: Work
   },
 ]

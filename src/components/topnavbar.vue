@@ -1,8 +1,8 @@
 <template>
     <div class="topnav">
-        <router-link to="/">Home</router-link>
-        <router-link to="/about">About</router-link>
-        <router-link to="/work">Work</router-link>
+        <router-link to="/cdjreekie/">Home</router-link>
+        <router-link to="/cdjreekie/about">About</router-link>
+        <router-link to="/cdjreekie/work">Work</router-link>
     </div>
 </template>
 
