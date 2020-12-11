@@ -34,8 +34,9 @@ export default {
 }
 
 .topnav a:active {
-  background-color: #4CAF50;
-  color: white;
+  background: #29abe2;
+  border-radius: 5px;
+  color: #fff;
 }
 
 </style>
