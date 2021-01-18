@@ -1,12 +1,13 @@
 <template>
   <div id="app">
-  <topnavbar></topnavbar>
-  <router-view/>
+    <topnavbar></topnavbar>
+    <router-view/>
   </div>
 </template>
 
 <script>
 import topnavbar from './components/topnavbar'
+
 
 export default {
   components: {
@@ -24,6 +25,11 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 0px;
+}
+
+body {
+    background-color:lightgray;
+
 }
 
 </style>

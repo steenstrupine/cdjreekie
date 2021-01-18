@@ -1,42 +1,54 @@
 <template>
-    <div class="topnav">
-        <router-link to="/cdjreekie/">Home</router-link>
-        <router-link to="/cdjreekie/about">About</router-link>
-        <router-link to="/cdjreekie/work">Work</router-link>
-    </div>
+    <nav class="navbar navbar-expand-sm bg">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <router-link class="nav-link" to="/cdjreekie" :class="activeClass('home')">Home</router-link>
+            </li>
+            <li class="nav-item">
+                <router-link class="nav-link" to="/cdjreekie/about" :class="activeClass('about')">About</router-link>
+            </li>
+            <li class="nav-item">
+                <router-link class="nav-link" to="/cdjreekie/work" :class="activeClass('work')">Work</router-link>
+            </li>
+         </ul>
+    </nav>
 </template>
 
 <script>
 export default {
-  name: 'topnavbar'
+    name: 'topnavbar',
+    methods: {
+        activeClass: function (...names) {
+            console.log(this.$route.name)
+            for (let name of names) {
+                if (name == this.$route.name)
+                return 'active';
+            }
+        }
+    }
 }
 </script>
 
 <style>
 
-.topnav {
-  background-color: #333;
-  overflow: hidden;
+nav {
+  background-color: #563d7c;
 }
 
-.topnav a {
-  float: left;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
+a.nav-link {
+  color: white;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
-.topnav a:hover {
-  background-color: #ddd;
-  color: black;
+nav a:hover {
+  background: lightgray; /* Anything you want */
+  color: black
 }
 
-.topnav a:active {
-  background: #29abe2;
-  border-radius: 5px;
-  color: #fff;
+nav .router-link-exact-active {
+    background: lightblue;
+    color: black
 }
 
 </style>

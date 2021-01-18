@@ -1,8 +1,8 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p> This site is work in progress, please check back soon</p>
-  </div>
+        <div class="container pt-2 pb-2 my-4 border text-left" style="background-color:white; ">
+            <h1>Welcome...</h1>
+            <p>{{ msg }}</p>
+        </div>
 </template>
 
 <script>
@@ -10,8 +10,14 @@
     name: 'Hello',
     data () {
       return {
-        msg: 'Welcome to the personal website of C.D.J Reekie'
+        msg: 'Welcome to the personal website of C.D.J Reekie. This site is work in progress but please feel free to browse completed sections.'
       }
     }
   }
 </script>
+
+<style>
+
+
+
+</style>
