@@ -9,10 +9,19 @@
     "deploy": "sh deploy.sh"
   },
   "dependencies": {
+    "@tensorflow/tfjs": "^1.7.4",
+    "@tensorflow/tfjs-node": "^2.6.0",
+    "apexcharts": "^3.23.1",
     "bootstrap-vue": "^2.1.0",
+    "canvas": "^2.6.1",
     "core-js": "^3.6.5",
+    "face-api.js": "^0.22.2",
     "vue": "^2.6.11",
-    "vue-router": "^3.4.9"
+    "vue-apexcharts": "^1.6.0",
+    "vue-graph": "^0.8.7",
+    "vue-pdf": "^4.2.0",
+    "vue-router": "^3.4.9",
+    "webcam-easy": "^1.0.5"
   },
   "devDependencies": {
     "@techiediaries/vue-cli-plugin-bootstrap": "~0.1.0",
