@@ -1,16 +1,18 @@
 <template>
         <div id="CustomContainer" class="customContainer container pt-4 pb-2 my-4 border text-left" style="background-color:white; ">
             <h2>Face detection with face-api</h2>
-            <p>Below is a simple face and mood detection model made with webcam-easy and face-api. The face-api module is built upon Tensorflow.js and can be used to detect faces and moods in either videos or static images. Refresh page to stop. Work in progress.</p>
+            <p>Below is a simple face and mood detection model made with <a href="https://github.com/bensonruan/webcam-easy" target="_blank">webcam-easy</a> and <a href="https://github.com/justadudewhohacks/face-api.js/" target="_blank">face-api</a>. The face-api module is built upon Tensorflow.js and can be used to detect faces and moods in either videos or static images. Work in progress. Best on computer browsers.</p>
             <div>
-                <div class="video-container">
+                <div v-if="webcamVisible" class="video-container">
                     <video id="webcam" ref="webcam" autoplay muted playsinline width="640" height="480"></video>
                     <canvas id="canvas" ref="canvas" class="canvas"></canvas>
                 </div>
                 <div class="btn-toolbar">
-                    <button class="btn2 mr-2" v-on:click="startWebcam">START</button>
-                    <button class="btn2 mr-2" v-on:click="stopWebcam">STOP</button>
-                    <button :disabled="!webcamStarted" class="btn2" v-on:click="faceDetect">DETECT</button>
+                    <button :disabled="webcamVisible" class="btn2 mr-2" v-on:click="showWebcam">SHOW</button>
+                    <button :disabled="webcamStarted || !webcamVisible" class="btn2 mr-2" v-on:click="startWebcam">START</button>
+                    <button :disabled="!webcamStarted || !webcamVisible" class="btn2 mr-2" v-on:click="stopWebcam">STOP</button>
+                    <button :disabled="!webcamStarted || detectingOn" class="btn2" v-on:click="faceDetect">DETECT</button>
+                    <a id="status" style="padding-left: 20px; color: red;">{{ statusMessage }}</a>
                 </div>
             </div>
        </div>
@@ -30,15 +32,23 @@ import * as faceapi from 'face-api.js'
             faceDetection: null,
             canvas: null,
             webcamStarted: false,
+            statusMessage: 'Click SHOW to initiate the webcam module!',
+            webcamVisible: false,
+            detectingOn: false
         }
     },
     methods: {
+        showWebcam() {
+            this.webcamVisible = true
+            this.statusMessage = 'Click START to start the video feed!'
+        },
         startWebcam() {
             this.webcamStarted = true;
             this.webcam = new Webcam(this.$refs.webcam, 'user', document.getElementById('canvas'))
             this.webcam.start().then(() => {
                 console.log("webcam started")
                 this.webcam.flip()
+                this.statusMessage = 'Click DETECT to begin the face detection model!'
             }).catch(err => {
                 console.log(err)
             });
@@ -58,16 +68,20 @@ import * as faceapi from 'face-api.js'
             container.appendChild(theimage);
         },
         faceDetect() {
+            document.getElementById("status").style.color = "orange";
+            this.statusMessage = '...loading models...'
             Promise.all([
-                faceapi.nets.ssdMobilenetv1.load('/models'),
-                faceapi.nets.tinyFaceDetector.load('./models'),
-                faceapi.nets.faceLandmark68TinyNet.load('./models'),
-                faceapi.nets.faceExpressionNet.load('./models')
+                faceapi.nets.ssdMobilenetv1.loadFromUri('./models'),
+                faceapi.nets.tinyFaceDetector.loadFromUri('./models'),
+                faceapi.nets.faceLandmark68TinyNet.loadFromUri('./models'),
+                faceapi.nets.faceExpressionNet.loadFromUri('./models')
             ]).then(() => {
                 this.canvas = document.getElementById('canvas')
                 this.canvas.width = this.$refs.webcam.width
                 this.canvas.height = this.$refs.webcam.height
                 this.startDetection()
+                this.statusMessage = ''
+                this.detectingOn = true
             });
         },
         startDetection() {
@@ -87,12 +101,17 @@ import * as faceapi from 'face-api.js'
 <style>
 
 .btn2 {
-    border-radius: 0px;
+    border-radius: 3px;
+    background-color: green;
+    color: white;
+    font-size: medium;
 }
 
 .btn2:disabled {
     background-color: lightgray;
     border-radius: 0px;
+    color: black;
+    font-size: medium;
 }
 
 .video-container {
